@@ -3,6 +3,11 @@
 Основан на Praat (метод Filtered Autocorrelation)
 """
 
+"""
+🎤 Анализатор интонации для студентов-лингвистов
+Основан на Praat (метод Filtered Autocorrelation)
+"""
+
 import streamlit as st
 import parselmouth
 import matplotlib.pyplot as plt
@@ -11,7 +16,16 @@ import tempfile
 import os
 from datetime import datetime
 import pandas as pd
+import subprocess
+import sys
 
+# Проверяем наличие FFmpeg и устанавливаем если нужно
+try:
+    subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
+except:
+    st.warning("⚠️ Устанавливаю FFmpeg...")
+    if sys.platform == 'linux':
+        os.system('apt-get update && apt-get install -y ffmpeg')
 # Настройка страницы
 st.set_page_config(
     page_title="Анализатор интонации",
